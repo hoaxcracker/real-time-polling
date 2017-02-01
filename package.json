@@ -1,0 +1,42 @@
+{
+  "name": "real-time-polling",
+  "version": "1.0.0",
+  "description": "An app for creation and usage of real time polling using web sockets.",
+  "main": "index.html",
+  "scripts": {
+    "start": "concurrently \"webpack-dev-server --hot --inline\" \"nodemon server/server.js\"",
+    "build": "webpack",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianlancaster/real-time-polling.git"
+  },
+  "author": "Ian Lancaster",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ianlancaster/real-time-polling/issues"
+  },
+  "homepage": "https://github.com/ianlancaster/real-time-polling#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.1",
+    "jquery": "^3.1.1",
+    "knex": "^0.12.6",
+    "md5": "^2.2.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "chai": "^3.5.0",
+    "concurrently": "^3.1.0",
+    "css-loader": "^0.25.0",
+    "mocha": "^3.1.0",
+    "mocha-loader": "^1.0.0",
+    "nodemon": "^1.11.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
+  }
+}
