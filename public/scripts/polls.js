@@ -1,13 +1,24 @@
 $(document).ready(() => {
-  authenticateUser()
-  const pollId = window.location.href.substr(window.location.href.lastIndexOf('/') + 1)
-  fetchPoll(pollId)
+  if (!localStorage.getItem('id_token')) {
+    localStorage.setItem('currentPoll', window.location.pathname);
+    window.location = '/login'
+  }
 })
+
+// $(document).ready(() => {
+//   authenticateUser()
+//   const pollId = window.location.href.substr(window.location.href.lastIndexOf('/') + 1)
+//   fetchPoll(pollId)
+// })
 
 const authenticateUser = () => {
   const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN, {
     auth: {
-      params: { scope: 'openid email' } // Details: https://auth0.com/docs/scopes
+      redirectUrl: window.location.origin + '/login',
+      responseType: 'token',
+      params: {
+        state: JSON.stringify({pathname: window.location.pathname})
+      }
     }
   })
 
@@ -58,6 +69,17 @@ const authenticateUser = () => {
 
   retrieveProfile()
 }
+
+const profile = JSON.parse(localStorage.getItem('profile'))
+
+const showProfileInfo = (profile) => {
+  $('.nickname').text(profile.nickname)
+  $('.btn-login').hide()
+  $('.avatar').attr('src', profile.picture).show()
+  $('.btn-logout').show()
+}
+
+showProfileInfo(profile)
 
 const fetchPoll = (pollId) => {
   fetch(`/api/polls/${pollId}`)
