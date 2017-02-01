@@ -1,4 +1,84 @@
-body {
-  font-size: 30px;
-  background-color: cadetblue;
+@import url('https://fonts.googleapis.com/css?family=Heebo:300,400,500');
+
+html {
+  background-color: whitesmoke;
+}
+
+main {
+  max-width: 700px;
+  margin: auto;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 400;
+  min-height: 100vh;
+  background-color: Gainsboro;
+}
+
+h2 {
+  background-color: DimGray;
+  color: white;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 500;
+  margin: auto;
+  text-align: center;
+  padding: 10px;
+}
+
+h3 {
+  background-color: DimGray;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 500;
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 5px;
+}
+
+form {
+  padding: 20px;
+}
+
+fieldset {
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+fieldset p {
+  margin: 0 20px;
+}
+
+label {
+  display: block;
+  padding: 10px 0;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+button {
+  width: 50%;
+  border: none;
+  padding: 15px;
+  color: white;
+  cursor: pointer;
+}
+
+#add-poll-option-button {
+  background-color: mediumSeaGreen;
+}
+
+#add-poll-option-button:hover {
+  background-color: darkSeaGreen;
+}
+
+#submit-new-poll-button {
+  background-color: DarkTurquoise;
+  margin-left: -4px;
+}
+
+#submit-new-poll-button:hover {
+  background-color: mediumTurquoise;
 }
