@@ -21,29 +21,20 @@
   "dependencies": {
     "body-parser": "^1.16.0",
     "express": "^4.14.1",
-    "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.1.1",
-    "knex": "^0.12.6",
     "path": "^0.12.7",
     "shortid": "^2.2.6"
   },
   "devDependencies": {
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.1.1",
-    "babel-loader": "^6.2.5",
     "chai": "^3.5.0",
-    "concurrently": "^3.1.0",
-    "css-loader": "^0.25.0",
     "eslint": "^3.14.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-babel": "^4.0.1",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
     "mocha": "^3.1.0",
-    "mocha-loader": "^1.0.0",
-    "nodemon": "^1.11.0",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.1"
+    "nodemon": "^1.11.0"
   }
 }
