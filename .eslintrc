@@ -10,6 +10,9 @@
   "env": {
     "browser" : true
   },
+  "globals": {
+    "$": true
+    },
   "rules": {
   }
 }

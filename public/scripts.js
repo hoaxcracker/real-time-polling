@@ -1,9 +1,3 @@
-require('./styles/normalize.css')
-require('./styles/styles.css')
-
-const $ = require('jquery')
-const fetch = require('isomorphic-fetch')
-
 $(document).ready(() => {
   fetchPolls()
   if (window.location.search) {

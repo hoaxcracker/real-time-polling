@@ -2,10 +2,13 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const shortid = require('shortid')
-// const path = require('path')
-// const environment = process.env.NODE_ENV || 'development'
-// const configuration = require('../db/knexfile')[environment]
-// const database = require('knex')(configuration)
+const path = require('path')
+
+app.use(express.static('public'))
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/index.html'))
+})
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
