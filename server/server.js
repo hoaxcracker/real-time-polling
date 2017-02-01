@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-// const md5 = require('md5')
+const shortid = require('shortid')
 // const path = require('path')
 // const environment = process.env.NODE_ENV || 'development'
 // const configuration = require('../db/knexfile')[environment]
@@ -17,8 +17,11 @@ app.use(function (req, res, next) {
 
 app.set('port', process.env.PORT || 3000)
 
+app.locals.polls = {}
+
 app.post('/polls', (req, res) => {
-  console.log(req.body)
+  app.locals.polls[shortid()] = req.body
+  res.json(app.locals.polls)
 })
 
 app.get('/polls', (req, res) => {
