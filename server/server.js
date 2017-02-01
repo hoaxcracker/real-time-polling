@@ -25,7 +25,7 @@ app.post('/polls', (req, res) => {
 })
 
 app.get('/polls', (req, res) => {
-  console.log(req.body)
+  res.json(app.locals.polls)
 })
 
 app.listen(app.get('port'), () => {
