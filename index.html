@@ -4,8 +4,47 @@
     <meta charset="utf-8">
     <title>Real Time Polling</title>
   </head>
+
   <body>
-    Body
+    <main>
+      <h2>Create New Poll</h2>
+
+      <form id="create-poll-form">
+        <label for="poll-title-input">Poll Title:</label>
+        <input
+          type="text"
+          placeholder="Who is the most awesome Mario brother?"
+          id="poll-title-input"
+        />
+
+        <fieldset id="poll-choices">
+          <p>
+            <label for="option1-input">Option 1:</label>
+            <input type="text" placeholder="Mario!" id="option1-input" />
+          </p>
+
+          <p>
+            <label for="option2-input">Option 2:</label>
+            <input type="text" placeholder="Luigi!" id="option2-input" />
+          </p>
+        </fieldset>
+
+        <section>
+          <button type="button" id="add-poll-option-button">
+            Add Another Option
+          </button>
+
+          <button type="submit" id="submit-new-poll-button">
+            Submit Your Poll
+          </button>
+        </section>
+      </form>
+
+      <h2>Active Polls</h2>
+      <section id="polls-list"></section>
+
+    </main>
   </body>
+
   <script src="/dist/main.bundle.js" charset="utf-8"></script>
 </html>
