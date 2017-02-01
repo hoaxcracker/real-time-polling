@@ -11,7 +11,10 @@
     "browser" : true
   },
   "globals": {
-    "$": true
+    "$": true,
+    "AUTH0_DOMAIN": true,
+    "AUTH0_CLIENT_ID": true,
+    "Auth0Lock":, true
     },
   "rules": {
   }
