@@ -1,19 +1,19 @@
 module.exports = {
   entry: {
-    "main.bundle.js": "./src/index.js",
-    "test.bundle.js": "mocha!./test/index.js"
+    main: "./lib/index.js",
+    test: "mocha!./test/index.js"
   },
   output: {
-    path: 'dist',
-    filename: "[name]"
+    path: __dirname,
+    filename: "[name].bundle.js"
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: '/node_modules/', loader: 'babel' },
+      { test: /\.js$/, exclude: '/node_modules/', loader: 'babel-loader' },
       { test: /\.css$/, loader: "style!css" }
     ]
   },
   resolve: {
     extensions: ['', '.js', '.json', '.css']
   }
-}
+};
