@@ -3,7 +3,7 @@ $(document).ready(() => {
 })
 
 const fetchPolls = () => {
-  fetch('http://localhost:3000/polls')
+  fetch('/api/polls')
     .then(response => response.json())
     .then(json => renderPolls(json))
     .catch(err => console.log('error: ', err))
@@ -35,7 +35,7 @@ const structurePollObject = ($inputs) => {
 }
 
 const postNewPoll = (pollObject) => {
-  fetch('http://localhost:3000/polls', {
+  fetch('/api/polls', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(pollObject)
