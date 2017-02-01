@@ -1,2 +1,2 @@
-console.log('test')
+require('./styles/normalize.css')
 require('./styles/styles.css')
