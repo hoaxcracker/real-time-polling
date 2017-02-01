@@ -1,10 +1,5 @@
 $(document).ready(() => {
   fetchPolls()
-  if (window.location.search) {
-    console.log(`trigger oauth and open poll ${window.location.hash}`)
-  } else {
-    console.log('proceed to polls list')
-  }
 })
 
 const fetchPolls = () => {
@@ -60,7 +55,7 @@ const renderPolls = (polls) => {
 
 const pollToHTML = (polls, pollId) => (`
     <article class="poll-link">
-      <a href="/?${pollId}">
+      <a href="/polls/${pollId}">
         <h4>${polls[pollId].title}</h4>
       </a>
     </article>
