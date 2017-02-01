@@ -14,19 +14,20 @@
         <input
           type="text"
           placeholder="Who is the most awesome Mario brother?"
-          id="poll-title-input"
+          name="title"
+          required
         />
 
         <fieldset id="poll-choices">
           <h3>Options</h3>
           <p>
             <label for="option1-input">Option 1:</label>
-            <input type="text" placeholder="Mario!" id="option1-input" />
+            <input type="text" placeholder="Mario!" name="option1" required/>
           </p>
 
           <p>
             <label for="option2-input">Option 2:</label>
-            <input type="text" placeholder="Luigi!" id="option2-input" />
+            <input type="text" placeholder="Luigi!" name="option2" required/>
           </p>
         </fieldset>
 
