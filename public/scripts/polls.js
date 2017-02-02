@@ -24,14 +24,30 @@ socket.on('pollError', (err) => {
   console.log(err)
 })
 
-const showPoll = (poll) => {
-  $('.poll-title').text(poll.title).show()
-}
-
 const showProfileInfo = (profile) => {
   $('.current-user-nickname').text(profile.nickname)
   $('.current-user-photo').attr('src', profile.photo).show()
 }
+
+const showPoll = (poll) => {
+  $('.poll-title').text(poll.title).show()
+  $('main').html(poll.options.map((option, i) => (
+    pollOptionToHTML(option, i)
+  )))
+}
+
+const pollOptionToHTML = (option, i) => (`
+  <article>
+    <section class='flex-align'>
+      <h4>${i + 1} : ${option.text}</h4>
+      <section class='flex-align vote-tally'>
+        <h4>Votes : ${option.users.length}</h4>
+        <button class='btn-vote'>Vote</button>
+      </section>
+    </section>
+    <section class='user-icons'></section>
+  </article>
+`)
 
 $('.btn-logout').click((e) => {
   e.preventDefault()
@@ -39,7 +55,8 @@ $('.btn-logout').click((e) => {
 })
 
 const logout = () => {
-  localStorage.removeItem('idToken')
+  localStorage.removeItem('profile')
+  localStorage.removeItem('id_token')
   window.location.href = '/'
 }
 

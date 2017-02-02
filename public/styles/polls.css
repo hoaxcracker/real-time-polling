@@ -1,4 +1,4 @@
-.current-user-info {
+.flex-align {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,4 +19,17 @@ h4 {
 .btn-logout {
   width: 120px;
   margin-right: 10px;
+}
+
+.btn-vote {
+  width: 120px;
+}
+
+.vote-tally {
+  width: 250px;
+}
+
+article {
+  border-bottom: 1px solid dimgray;
+  padding: 10px;
 }

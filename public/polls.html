@@ -2,7 +2,7 @@
 <html>
   <head>
     <script>
-      if (!localStorage.getItem('id_token')) {
+      if (!localStorage.getItem('profile')) {
         localStorage.setItem('currentPoll', window.location.pathname)
         window.location = '/login'
       }
@@ -16,8 +16,8 @@
 
   <body>
     <header>
-      <section class="current-user-info">
-        <span class="current-user-info">
+      <section class="flex-align">
+        <span class="flex-align">
           <img alt="current-user-photo" class="current-user-photo" style="display:none;">
           <h4>Logged in as <span class="current-user-nickname"></span></h4>
         </span>
