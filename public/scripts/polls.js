@@ -45,7 +45,11 @@ const pollOptionToHTML = (option, i) => (`
         <button class='btn-vote' id='${i}'>Vote</button>
       </section>
     </section>
-    <section class='user-icons'></section>
+    <section class='user-icons'>
+      ${Object.keys(option.profiles).reduce((html, profile) => (
+        `${html}<img src='${option.profiles[profile].photo}'/>`
+      ), '')}
+    </section>
   </article>
 `)
 

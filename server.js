@@ -73,7 +73,7 @@ io.on('connection', (socket) => {
     app.locals.polls[pollId].options[vote].profiles[uid] = profile
 
     // Send out new poll object
-    socket.emit('returnPoll', app.locals.polls[pollId])
+    io.sockets.emit('returnPoll', app.locals.polls[pollId])
   })
 })
 
