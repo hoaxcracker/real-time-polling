@@ -13,7 +13,7 @@ const io = require('socket.io')(http)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   next()
@@ -49,16 +49,16 @@ app.get('/api/polls', (req, res) => {
 // ------------------------------------
 
 io.on('connection', (socket) => {
-  console.log('a connection has been made')
   socket.emit('requestAuth')
 
   socket.on('returnAuthRequestPoll', ({ profile, pollId }) => {
     const { nickname, photo, uid } = profile
+
     if (nickname && photo && uid) {
       socket.emit('returnPoll', app.locals.polls[pollId])
     } else {
-      socket.emit('pollError', (
-        ' There was an issue authenticating your account. Please try to log in again.'
+      socket.emit('returnErr', (
+        'There was an issue authenticating your account. Please log out and try again.'
       ))
     }
   })

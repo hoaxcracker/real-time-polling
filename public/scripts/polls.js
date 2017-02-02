@@ -10,18 +10,15 @@ const profile = {
 }
 
 socket.on('requestAuth', () => {
-  console.log('you have connected')
   socket.emit('returnAuthRequestPoll', { profile, pollId })
 })
 
 socket.on('returnPoll', (poll) => {
-  console.log('you have received a poll')
-  console.log(poll)
   showPoll(poll)
 })
 
-socket.on('pollError', (err) => {
-  console.log(err)
+socket.on('returnErr', (err) => {
+  alert(err)
 })
 
 const showProfileInfo = (profile) => {
