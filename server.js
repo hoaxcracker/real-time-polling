@@ -3,6 +3,12 @@ const app = express()
 const bodyParser = require('body-parser')
 const shortid = require('shortid')
 const path = require('path')
+const http = require('http').Server(app)
+const io = require('socket.io')(http)
+
+// ------------------------------------
+// REST API
+// ------------------------------------
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -38,6 +44,15 @@ app.get('/api/polls', (req, res) => {
   res.json(app.locals.polls)
 })
 
-app.listen(app.get('port'), () => {
+// ------------------------------------
+// Web Sockets
+// ------------------------------------
+
+io.on('connection', (socket) => {
+  console.log('a connection has been made')
+  io.sockets.emit('connected')
+})
+
+http.listen(app.get('port'), () => {
   console.log(`Express server is running on ${app.get('port')}.`)
 })

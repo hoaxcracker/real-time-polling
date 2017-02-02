@@ -1,3 +1,9 @@
+const socket = io()
+
+socket.on('connected', (userCount) => {
+  console.log('you have connected')
+})
+
 const profile = JSON.parse(localStorage.getItem('profile'))
 
 const showProfileInfo = (profile) => {
