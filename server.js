@@ -50,10 +50,15 @@ app.get('/api/polls', (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('a connection has been made')
-  io.sockets.emit('connected')
+  socket.emit('requestAuth')
 
-  socket.on('newPrivateChannel', (userId) => {
-    socket.emit(userId)
+  socket.on('returnAuthRequestPoll', ({ profile, pollId }) => {
+    const { nickname, photo, uid } = profile
+    if (nickname && photo && uid) {
+      socket.emit('returnPoll', app.locals.polls[pollId])
+      return
+    }
+    socket.emit('pollError', ' There was an issue authenticating your account. Please try to log in again.')
   })
 })
 

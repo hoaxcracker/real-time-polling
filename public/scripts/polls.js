@@ -1,38 +1,34 @@
+localStorage.removeItem('currentPoll')
+
 const socket = io()
+const pollId = (window.location.href.substr(window.location.href.lastIndexOf('/') + 1))
+const fullProfile = JSON.parse(localStorage.getItem('profile'))
+const profile = {
+  nickname: fullProfile.nickname,
+  photo: fullProfile.picture,
+  uid: fullProfile.user_id
+}
 
-const profile = JSON.parse(localStorage.getItem('profile'))
-console.log(profile)
-
-socket.on('connected', (userCount) => {
+socket.on('requestAuth', () => {
   console.log('you have connected')
-  socket.emit('newPrivateChannel', profile.user_id)
+  socket.emit('returnAuthRequestPoll', { profile, pollId })
 })
 
-socket.on(profile.user_id, () => {
-  console.log('you have connected to your private channel')
+socket.on('returnPoll', (poll) => {
+  console.log('you have received a poll')
+  console.log(poll)
+})
+
+socket.on('pollError', (err) => {
+  console.log(err)
 })
 
 const showProfileInfo = (profile) => {
   $('.nickname').text(profile.nickname)
   $('.btn-login').hide()
-  $('.avatar').attr('src', profile.picture).show()
+  $('.avatar').attr('src', profile.photo).show()
   $('.btn-logout').show()
 }
-
-showProfileInfo(profile)
-
-// // Note: this may be a better job for web sockets
-
-// // getPollId from url
-//
-// const fetchPoll = (pollId) => {
-//   fetch(`/api/polls/${pollId}`)
-//     .then(response => response.json())
-//     .then(json => console.log(json))
-//     .catch(err => console.log('error: ', err))
-// }
-//
-// // fetchPoll(pollId)
 
 $('.btn-logout').click((e) => {
   e.preventDefault()
@@ -43,3 +39,5 @@ const logout = () => {
   localStorage.removeItem('idToken')
   window.location.href = '/'
 }
+
+showProfileInfo(profile)
