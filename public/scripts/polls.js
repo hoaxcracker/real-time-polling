@@ -1,10 +1,3 @@
-$(document).ready(() => {
-  if (!localStorage.getItem('id_token')) {
-    localStorage.setItem('currentPoll', window.location.pathname)
-    window.location = '/login'
-  }
-})
-
 const profile = JSON.parse(localStorage.getItem('profile'))
 
 const showProfileInfo = (profile) => {

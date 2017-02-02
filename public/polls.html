@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script>
+      if (!localStorage.getItem('id_token')) {
+        localStorage.setItem('currentPoll', window.location.pathname)
+        window.location = '/login'
+      } 
+    </script>
     <meta charset="utf-8">
     <title>Real Time Polling</title>
     <link rel="stylesheet" href="/styles/normalize.css">
