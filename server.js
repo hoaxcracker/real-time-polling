@@ -56,9 +56,24 @@ io.on('connection', (socket) => {
     const { nickname, photo, uid } = profile
     if (nickname && photo && uid) {
       socket.emit('returnPoll', app.locals.polls[pollId])
-      return
+    } else {
+      socket.emit('pollError', (
+        ' There was an issue authenticating your account. Please try to log in again.'
+      ))
     }
-    socket.emit('pollError', ' There was an issue authenticating your account. Please try to log in again.')
+  })
+
+  socket.on('vote', ({ profile, vote, pollId, uid }) => {
+    // Remove current vote
+    app.locals.polls[pollId].options.forEach((option) => {
+      delete option.profiles[uid]
+    })
+
+    // Place new vote
+    app.locals.polls[pollId].options[vote].profiles[uid] = profile
+
+    // Send out new poll object
+    socket.emit('returnPoll', app.locals.polls[pollId])
   })
 })
 

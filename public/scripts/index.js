@@ -29,7 +29,7 @@ const structurePollObject = ($inputs) => {
     }
     options.push({
       text: $(this).val(),
-      users: []
+      profiles: {}
     })
     $(this).val('')
   })

@@ -16,13 +16,12 @@ h4 {
   display: inline-block;
 }
 
-.btn-logout {
+button[class^='btn'] {
   width: 120px;
-  margin-right: 10px;
 }
 
-.btn-vote {
-  width: 120px;
+.btn-logout {
+  margin-right: 10px;
 }
 
 .vote-tally {
