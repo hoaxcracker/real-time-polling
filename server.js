@@ -15,6 +15,8 @@ app.use(function (req, res, next) {
 
 app.set('port', process.env.PORT || 3000)
 
+app.locals.polls = {}
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'))
 })
@@ -27,11 +29,6 @@ app.get('/polls/:poll_id', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/polls.html'))
 })
 
-app.get('/api/polls/:poll_id', (req, res) => {
-  console.log(req.params.poll_id)
-})
-
-app.locals.polls = {}
 app.post('/api/polls', (req, res) => {
   app.locals.polls[shortid()] = req.body
   res.json(app.locals.polls)
