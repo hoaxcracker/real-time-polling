@@ -35,11 +35,13 @@ const showPoll = (poll) => {
 
 const pollOptionToHTML = (option, i) => (`
   <article>
-    <section class='flex-align'>
+    <section>
       <h4>${i + 1} : ${option.text}</h4>
-      <section class='flex-align vote-tally'>
-        <h4>Votes : ${Object.keys(option.profiles).length}</h4>
-        <button class='btn-vote' id='${i}'>Vote</button>
+      <section class='vote-tally'>
+        <span class='flex-align'>
+          <h4>Votes : ${Object.keys(option.profiles).length}</h4>
+          <button class='btn-vote' id='${i}'>Vote</button>
+        </span>
       </section>
     </section>
     <section class='user-icons'>

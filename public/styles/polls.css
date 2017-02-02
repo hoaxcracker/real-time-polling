@@ -18,17 +18,18 @@ h4 {
 
 button[class^='btn'] {
   width: 120px;
-}
-
-.btn-logout {
-  margin-right: 10px;
+  float: right;
+  height: 40px;
+  padding: 4px;
+  margin: 0 10px;
 }
 
 .vote-tally {
-  width: 250px;
+  width: 260px;
+  display:inline-block;
+  float: right;
 }
 
 article {
   border-bottom: 1px solid dimgray;
-  padding: 10px;
 }
