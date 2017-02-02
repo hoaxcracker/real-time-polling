@@ -7,11 +7,6 @@ $(document).ready(() => {
 
   lock.show()
 
-  $('.btn-logout').click((e) => {
-    e.preventDefault()
-    logout()
-  })
-
   lock.on('authenticated', (authResult) => {
     lock.getProfile(authResult.idToken, (error, profile) => {
       if (error) {
