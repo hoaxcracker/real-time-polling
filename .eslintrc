@@ -18,7 +18,8 @@
     "Auth0Lock":, true,
     "it": true,
     "describe": true,
-    "context": true
+    "context": true,
+    "io": true
     },
   "rules": {
   }

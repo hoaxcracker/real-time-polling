@@ -1,10 +1,16 @@
 const socket = io()
 
+const profile = JSON.parse(localStorage.getItem('profile'))
+console.log(profile)
+
 socket.on('connected', (userCount) => {
   console.log('you have connected')
+  socket.emit('newPrivateChannel', profile.user_id)
 })
 
-const profile = JSON.parse(localStorage.getItem('profile'))
+socket.on(profile.user_id, () => {
+  console.log('you have connected to your private channel')
+})
 
 const showProfileInfo = (profile) => {
   $('.nickname').text(profile.nickname)

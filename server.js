@@ -51,6 +51,10 @@ app.get('/api/polls', (req, res) => {
 io.on('connection', (socket) => {
   console.log('a connection has been made')
   io.sockets.emit('connected')
+
+  socket.on('newPrivateChannel', (userId) => {
+    socket.emit(userId)
+  })
 })
 
 http.listen(app.get('port'), () => {
