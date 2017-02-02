@@ -80,3 +80,5 @@ io.on('connection', (socket) => {
 http.listen(app.get('port'), () => {
   console.log(`Express server is running on ${app.get('port')}.`)
 })
+
+module.exports = http

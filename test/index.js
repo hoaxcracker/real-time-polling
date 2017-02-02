@@ -1,7 +1,20 @@
-const assert = require('chai').assert
+const expect = require('chai').expect
+const request = require('supertest')
 
-describe('our test bundle', function () {
-  it('should work', function () {
-    assert(true)
+const app = require('../server')
+
+describe('GET /', () => {
+  it('responds with success', (done) => {
+    request(app)
+      .get('/')
+      .expect(200, done)
+  })
+})
+
+describe('undefined routes', () => {
+  it('respond with a 404', (done) => {
+    request(app)
+      .get('/not-real')
+      .expect(404, done)
   })
 })
