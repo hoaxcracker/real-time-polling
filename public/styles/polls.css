@@ -1,0 +1,22 @@
+.current-user-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+img {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  margin: 10px;
+}
+
+h4 {
+  text-align: left;
+  display: inline-block;
+}
+
+.btn-logout {
+  width: 120px;
+  margin-right: 10px;
+}

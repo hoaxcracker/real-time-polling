@@ -17,17 +17,20 @@ socket.on('requestAuth', () => {
 socket.on('returnPoll', (poll) => {
   console.log('you have received a poll')
   console.log(poll)
+  showPoll(poll)
 })
 
 socket.on('pollError', (err) => {
   console.log(err)
 })
 
+const showPoll = (poll) => {
+  $('.poll-title').text(poll.title).show()
+}
+
 const showProfileInfo = (profile) => {
-  $('.nickname').text(profile.nickname)
-  $('.btn-login').hide()
-  $('.avatar').attr('src', profile.photo).show()
-  $('.btn-logout').show()
+  $('.current-user-nickname').text(profile.nickname)
+  $('.current-user-photo').attr('src', profile.photo).show()
 }
 
 $('.btn-logout').click((e) => {
