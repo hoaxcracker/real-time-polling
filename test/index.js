@@ -83,6 +83,32 @@ describe('GET /api/polls', () => {
   })
 })
 
+describe('POST /api/polls', () => {
+  const testPoll = {
+    tite: 'Poll Title',
+    options: [
+      { text: 'option1', profiles: {} },
+      { text: 'option2', profiles: {} }
+    ]
+  }
+
+  it('respond with an object containing a new poll object', (done) => {
+    request(app)
+      .post('/api/polls')
+      .send(testPoll)
+      .expect((res) => {
+        const resPoll = res.body[Object.keys(res.body)[0]]
+
+        expect(Object.keys(res.body).length).to.equal(1)
+        expect(resPoll).to.deep.equal(testPoll)
+      })
+      .end((err, res) => {
+        if (err) return done(err)
+        done()
+      })
+  })
+})
+
 // ------------------------------------
 // Web Socket Tests
 // ------------------------------------
