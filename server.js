@@ -35,12 +35,12 @@ app.get('/polls/:poll_id', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/polls.html'))
 })
 
-app.post('/api/polls', (req, res) => {
-  app.locals.polls[shortid()] = req.body
+app.get('/api/polls', (req, res) => {
   res.json(app.locals.polls)
 })
 
-app.get('/api/polls', (req, res) => {
+app.post('/api/polls', (req, res) => {
+  app.locals.polls[shortid()] = req.body
   res.json(app.locals.polls)
 })
 
