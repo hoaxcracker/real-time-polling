@@ -13,7 +13,11 @@ socket.on('requestAuth', () => {
   socket.emit('returnAuthRequestPoll', { profile, pollId })
 })
 
-socket.on('returnPoll', (poll) => {
+socket.on('returnInitialPoll', (poll) => {
+  showPoll(poll)
+})
+
+socket.on('returnNewPoll', (poll) => {
   showPoll(poll)
 })
 

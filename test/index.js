@@ -1,11 +1,36 @@
 const expect = require('chai').expect
 const request = require('supertest')
-const app = require('../server')
+const app = require('../server').app
 const io = require('socket.io-client')
 const socketURL = 'http://localhost:3000'
 const options = {
   transports: ['websocket'],
   'force new connection': true
+}
+
+// ------------------------------------
+// Mock data
+// ------------------------------------
+
+const poll = {
+  tite: 'Poll Title',
+  options: [
+    { text: 'option1', profiles: {} },
+    { text: 'option2', profiles: {} }
+  ]
+}
+
+const profile = {
+  nickname: 'fullProfile.nickname',
+  photo: 'fullProfile.picture',
+  uid: 'fullProfile.user_id'
+}
+
+const votePackage = {
+  profile,
+  uid: profile.uid,
+  vote: 1,
+  pollId: undefined
 }
 
 // ------------------------------------
@@ -84,23 +109,15 @@ describe('GET /api/polls', () => {
 })
 
 describe('POST /api/polls', () => {
-  const testPoll = {
-    tite: 'Poll Title',
-    options: [
-      { text: 'option1', profiles: {} },
-      { text: 'option2', profiles: {} }
-    ]
-  }
-
   it('respond with an object containing a new poll object', (done) => {
     request(app)
       .post('/api/polls')
-      .send(testPoll)
+      .send(poll)
       .expect((res) => {
         const resPoll = res.body[Object.keys(res.body)[0]]
 
         expect(Object.keys(res.body).length).to.equal(1)
-        expect(resPoll).to.deep.equal(testPoll)
+        expect(resPoll).to.deep.equal(poll)
       })
       .end((err, res) => {
         if (err) return done(err)
@@ -114,10 +131,45 @@ describe('POST /api/polls', () => {
 // ------------------------------------
 
 describe('Socket tests', () => {
-  it('should test', (done) => {
+  it('should authenticate the user and return a poll on connection', (done) => {
     const client1 = io.connect(socketURL, options)
+    const pollId = Object.keys(app.locals.polls)[0]
 
-    client1.on('connect', (data) => {
+    client1.on('requestAuth', (data) => {
+      client1.emit('returnAuthRequestPoll', { profile, pollId })
+    })
+
+    client1.on('returnInitialPoll', (data) => {
+      done()
+    })
+  })
+
+  it('should return an error if the profile is incomplete', (done) => {
+    const client1 = io.connect(socketURL, options)
+    const pollId = Object.keys(app.locals.polls)[0]
+    const profile = {
+      nickname: 'fullProfile.nickname',
+      photo: 'fullProfile.picture'
+    }
+
+    client1.on('requestAuth', (data) => {
+      client1.emit('returnAuthRequestPoll', { profile, pollId })
+    })
+
+    client1.on('returnErr', (data) => {
+      done()
+    })
+  })
+
+  it('should send a new poll object to all connected clients when any client votes', (done) => {
+    const client1 = io.connect(socketURL, options)
+    const client2 = io.connect(socketURL, options)
+    const pollId = Object.keys(app.locals.polls)[0]
+    votePackage.pollId = pollId
+
+    client1.emit('vote', votePackage)
+
+    client2.on('returnNewPoll', (data) => {
       done()
     })
   })

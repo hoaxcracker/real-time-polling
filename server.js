@@ -3,8 +3,8 @@ const app = express()
 const bodyParser = require('body-parser')
 const shortid = require('shortid')
 const path = require('path')
-const http = require('http').Server(app)
-const io = require('socket.io')(http)
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
 
 // ------------------------------------
 // REST API
@@ -55,7 +55,7 @@ io.on('connection', (socket) => {
     const { nickname, photo, uid } = profile
 
     if (nickname && photo && uid) {
-      socket.emit('returnPoll', app.locals.polls[pollId])
+      socket.emit('returnInitialPoll', app.locals.polls[pollId])
     } else {
       socket.emit('returnErr', (
         'There was an issue authenticating your account. Please log out and try again.'
@@ -73,12 +73,12 @@ io.on('connection', (socket) => {
     app.locals.polls[pollId].options[vote].profiles[uid] = profile
 
     // Send out new poll object
-    io.sockets.emit('returnPoll', app.locals.polls[pollId])
+    io.sockets.emit('returnNewPoll', app.locals.polls[pollId])
   })
 })
 
-http.listen(app.get('port'), () => {
+server.listen(app.get('port'), () => {
   console.log(`Express server is running on ${app.get('port')}.`)
 })
 
-module.exports = http
+module.exports = { server, app }
