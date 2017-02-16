@@ -3,7 +3,7 @@ $(document).ready(() => {
 })
 
 const fetchPolls = () => {
-  fetch('/api/polls')
+  fetch('http://localhost:3000/api/polls')
     .then(response => response.json())
     .then(json => renderPolls(json))
     .catch(err => console.log('error: ', err))
@@ -38,7 +38,7 @@ const structurePollObject = ($inputs) => {
 }
 
 const postNewPoll = (pollObject) => {
-  fetch('/api/polls', {
+  fetch('http://localhost:3000/api/polls', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(pollObject)
@@ -58,7 +58,7 @@ const renderPolls = (polls) => {
 
 const pollToHTML = (polls, pollId) => (`
     <article class="poll-link">
-      <a href="/polls/${pollId}">
+      <a href="http://localhost:3000/polls/${pollId}">
         <h4>${polls[pollId].title}</h4>
       </a>
     </article>
